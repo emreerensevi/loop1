@@ -1,0 +1,7 @@
+trial<- cbind.data.frame(N39_final_18_1_22, probability1)
+ilk<- trial[,c(12:19)]
+for(i in c(23:90)) {
+  modell6<- lm(as.matrix(ilk)~as.matrix(trial[[i]])+age, data=trial)
+  print(names(trial)[i])
+  summary(modell6)
+}
