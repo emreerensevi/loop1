@@ -1,0 +1,37 @@
+---
+title: "main notebook"
+output: html_notebook
+---
+
+I recommended that you use R notebooks to keep your work tidy.
+
+
+
+```{r}
+library(tidyverse) # as you saw in the books I sent you, it is better to use tibbles from tidyverse than data.frame
+source("rutils/rutils.R") # source the file with a some functions I wrote.
+
+```
+
+```{r}
+clinical_data <- read_csv("../data/N39_csv.csv") # load the df with the clinical data
+tractotron <- read_csv("../data/probability_csv.csv") # load the df with the tracts
+
+df <- full_join(clinical_data, tractotron, by = "id") # join the two dfs
+```
+
+
+```{r}
+## The lm loop function take vectors. Try to create the vectors of the variables of interest and pass them to the function Example:::
+outcome <- c("nihss_t1", "mrs_t1")
+explanatory <- c("Cingulum_Left_anterior", "Cingulum_Left_anterior")
+
+loop_df <- lm_loop(outcome_variable = outcome, explanatory_variable = explanatory, correct_age = TRUE, df = df)
+
+
+loop_df
+
+
+# You can read the code in rutils and modify it as you please to adapt lm() to whatever you want to do. For simple examples as above it should work OK. I also recommend to read about NA and what how to deal with them.
+```
+
