@@ -1,7 +1,10 @@
-trial<- cbind.data.frame(N39_final_18_1_22, probability1)
-ilk<- trial[,c(12:19)]
-for(i in c(23:90)) {
-  modell6<- lm(as.matrix(ilk)~as.matrix(trial[[i]])+age, data=trial)
-  print(names(trial)[i])
+data1<- read.csv(file.choose(), header = T)
+data2<- read.csv(file.choose(), header = T, sep = ",")
+data_merged<- merge(data1,data2,by ="id")
+
+ilk<- data_merged[,c(12:19)]
+for(i in 22:89) {
+  modell6<- lm(as.matrix(ilk)~data_merged[[i]]+age, data=data_merged)
+  print(names(data_merged)[i])
   summary(modell6)
 }
